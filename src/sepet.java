@@ -31,12 +31,12 @@ public double toplamFıyat() {
 
 
 public void sepetGoster() {
-        System.out.println("=== SEPET ===");
+        System.out.println("    SEPET ");
         for (int i = 0; i < urunler.size(); i++) {
             urun u = urunler.get(i);
             System.out.println(u.geturunAdi() + " | " + u.geturunFiyat() + " TL x " + u.geturunAdet());
         }
-        System.out.println("TOPLAM: " + toplamFıyat() + " TL");
+        System.out.println("TOPLAM| " + toplamFıyat() + " TL");
     }
 
 
@@ -46,7 +46,11 @@ public static void main(String[] args) {
     sepet s = new sepet();
     s.urunEkle("Futbol Topu", 500, 2);
     s.urunEkle("Forma", 4500, 3);
-    s.sepetGoster();
+    KargoDecorator k = new KargoDecorator(s, 50);
+    k.sepetGoster();
+   
+    HediyePaketiDecorator h = new HediyePaketiDecorator(s, 30);
+    h.sepetGoster();
 }
 }
 
