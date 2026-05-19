@@ -1,49 +1,88 @@
-# Faz 0 - Başlangıçta Fark Ettiğim Problemler
+# PROBLEMS.md — Başlangıç Kodu Analizi
 
-## Problem 1
-Ürün adı ayrı listede, fiyat ve adet ayrı listede tutuluyor.
-
-Bence bu çok mantıklı değil çünkü ileride veriler karışabilir. 
-Bir ürünün fiyatı yanlış ürünle eşleşirse bulması zor olur.
+> **Konu:** D — E-Ticaret Sepeti  
+> **Faz:** 0 (Hazırlık — puanlanmaz)  
+> **Amaç:** Tasarım örüntüsü uygulamadan önce kodun sorunlarını tespit etmek.
 
 ---
 
-## Problem 2
-Fiyat ve adet double[] içinde tutulmuş.
+## Benim Tespit Ettiğim Sorunlar
 
-Bu ilk başta kısa görünüyor ama okunması zor.
-Mesela [0] fiyat mıydı adet miydi karıştırılabiliyor.
-
----
-
-## Problem 3
-İndirim hesaplamaları direkt Sepet sınıfının içinde.
-
-Sepet aslında sadece ürünleri tutmalı.
-İndirim işi ayrı olursa kod daha düzenli olurdu.
+### Problem 1 — Veri Tutarlılığı Riski
+Ürün adı, fiyatı ve adedi ayrı yapılarda tutuluyordu (ayrı listeler veya diziler).  
+Bu yaklaşım başta işe yarıyor gibi görünse de ilerleyen süreçte bir ürünün fiyatı
+yanlış indeksle eşleşebilir. Böyle bir hata oluştuğunda bulmak çok zor olurdu.  
+**Neden sorun?** Veriler birbirine bağlı olduğu hâlde ayrı tutulmak, tutarsızlığa davetiye çıkarır.
 
 ---
 
-## Problem 4
-Çok fazla if-else kullanılmış.
-
-Şu an az olduğu için sorun yok gibi duruyor ama
-yeni kampanyalar eklenirse kod büyüyüp karışacak.
-
----
-
-## Problem 5
-Sepet hem hesap yapıyor hem ekrana yazdırıyor.
-
-Tek bir sınıfın bu kadar farklı işi yapması bence iyi değil.
-İleride değiştirmek zor olabilir.
+### Problem 2 — Okunması Zor Veri Yapısı
+Fiyat ve adet `double[]` gibi diziler içinde saklanıyordu.  
+`dizi[0]` fiyat mı, adet mi? Kodu yazan kişi bile bir süre sonra karıştırabilir.  
+**Neden sorun?** Kodun okunabilirliği düşer; bakımı zorlaşır.
 
 ---
 
-## Kendi Değerlendirmem
+### Problem 3 — İndirim Hesaplaması Sepet Sınıfının İçinde
+İndirim mantığı doğrudan `Sepet` sınıfına gömülüydü.  
+`Sepet`in asıl görevi ürünleri tutmak olmalı. İndirim işini de üstlenmesi
+sınıfı şişiriyor ve tek sorumluluk prensibini (SRP) ihlal ediyor.  
+**Neden sorun?** Yeni bir indirim kuralı eklemek için `Sepet` sınıfını değiştirmek gerekir — bu kırılgan bir yapıdır.
 
-Kodu yazınca çalıştı ama yapının çok düzenli olmadığını fark ettim.
-Başta hızlı çözmek için böyle yaptım ama büyürse yönetmesi zorlaşır.
+---
 
-Bu yüzden sonraki fazlarda kodu parçalara ayırıp
-daha temiz hale getirmeyi düşünüyorum.
+### Problem 4 — Aşırı if-else Kullanımı
+İndirim ve ödeme seçimleri için uzun `if-else` zincirleri kullanılıyordu.  
+Şu an az seçenek olduğu için yönetilebilir görünüyor ama her yeni kampanya
+veya ödeme yöntemi bu blokları büyütecek.  
+**Neden sorun?** Açık/Kapalı Prensibini (OCP) ihlal eder: yeni özellik eklemek için
+mevcut kodu değiştirmek zorunda kalırsın.
+
+---
+
+### Problem 5 — Tek Sınıf Çok İş Yapıyor
+`Sepet` sınıfı hem ürün ekliyor, hem hesaplama yapıyor, hem de ekrana yazdırıyor.  
+Bu kadar farklı sorumluluğun tek sınıfa yüklenmesi "God Class" sorununa yol açar.  
+**Neden sorun?** İleride yazdırma formatını değiştirmek istersen hesaplama koduna
+da dokunmak zorunda kalırsın — bağımlılık zinciri kırılgan hâle gelir.
+
+---
+
+## AI (Claude) Karşılaştırması
+
+> *Kodu Claude'a gösterdim ve "Bu kodda hangi tasarım sorunlarını görüyorsun?" diye sordum.*
+
+### AI'ın Tespit Ettikleri
+
+| # | AI'ın Gördüğü Sorun |
+|---|---|
+| 1 | `urun` ve `sepet` sınıf isimleri küçük harf — Java PascalCase convention'ına aykırı |
+| 2 | `toplamFıyat()` metodunda Türkçe karakter (`ı`) var — farklı sistemlerde derleme sorunu çıkarabilir |
+| 3 | `urunler` listesi boşken toplam hesabı yapılıyor — savunmacı programlama eksik |
+| 4 | `sepetGoster()` hem hesaplama hem yazdırma yapıyor — SRP ihlali |
+| 5 | İndirim ve ödeme stratejileri sabit sıraya bağımlı (önce indirim, sonra ödeme) — bu sıra belgelenmemiş, değişirse sonuç farklı çıkar |
+
+### Karşılaştırma
+
+| Sorun | Ben Gördüm | AI Gördü |
+|---|:---:|:---:|
+| Veri dağınıklığı (ayrı listeler) | ✅ | ➖ |
+| Okunması zor dizi yapısı | ✅ | ➖ |
+| İndirim Sepet'e gömülü (SRP) | ✅ | ✅ |
+| if-else zincirleri (OCP) | ✅ | ➖ |
+| God Class / çok sorumluluk | ✅ | ✅ |
+| İsimlendirme (Java convention) | ➖ | ✅ |
+| Türkçe karakter sorunu | ➖ | ✅ |
+| Strateji uygulama sırası belirsizliği | ➖ | ✅ |
+
+### Değerlendirmem
+
+Benim tespitlerim daha çok **mimari ve tasarım** açısındandı:
+veri tutarlılığı, sorumluluk dağılımı ve genişletilebilirlik.
+
+AI ise daha çok **kod kalitesi ve teknik detay** açısından baktı:
+isimlendirme kuralları, karakter kodlaması ve strateji sırası gibi
+konuları ben atlamıştım.
+
+İkisini birleştirince daha eksiksiz bir analiz ortaya çıktı.
+Sonraki fazlarda hem mimari sorunları hem teknik detayları göz önünde bulundurarak ilerlemeyi planlıyorum.
