@@ -1,0 +1,21 @@
+name: Java CI
+
+on:
+  push:
+    branches: [ master, faz1, faz2, faz3 ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Java 21 kur
+      uses: actions/setup-java@v3
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+
+    - name: Kodu derle
+      run: javac src/*.java -d bin
