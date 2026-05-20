@@ -1,0 +1,61 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Sayfa-1" id="vlOwxirjAj1jQJyS4bEv">
+    <mxGraphModel dx="1408" dy="860" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" parent="1" style="swimlane;fontStyle=2;" value="IndirimStrategy" vertex="1">
+          <mxGeometry height="60" width="200" x="300" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="3" parent="2" style="text;align=left;" value="+ IndirimUygula(fiyat): double" vertex="1">
+          <mxGeometry height="30" width="200" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4" parent="1" style="swimlane;" value="yuzdeOnIndirim" vertex="1">
+          <mxGeometry height="60" width="180" x="50" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="5" parent="4" style="text;align=left;" value="+ IndirimUygula()" vertex="1">
+          <mxGeometry height="30" width="180" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="6" parent="1" style="swimlane;" value="yuzdeYirmiIndirim" vertex="1">
+          <mxGeometry height="60" width="180" x="280" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="7" parent="6" style="text;align=left;" value="+ IndirimUygula()" vertex="1">
+          <mxGeometry height="30" width="180" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="10" edge="1" parent="1" source="4" style="endArrow=block;endFill=0;dashed=1;" target="2" value="implements">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="11" edge="1" parent="1" source="6" style="endArrow=block;endFill=0;dashed=1;" target="2" value="implements">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="12" edge="1" parent="1" source="8" style="endArrow=block;endFill=0;dashed=1;" target="2" value="implements">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="13" parent="1" style="swimlane;fontStyle=2;" value="SepetObserver" vertex="1">
+          <mxGeometry height="60" width="200" x="300" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="14" parent="13" style="text;align=left;" value="+ guncelle(mesaj): void" vertex="1">
+          <mxGeometry height="30" width="200" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="15" parent="1" style="swimlane;" value="KonsolObserver" vertex="1">
+          <mxGeometry height="60" width="200" x="300" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="16" parent="15" style="text;align=left;" value="+ guncelle(mesaj): void" vertex="1">
+          <mxGeometry height="30" width="200" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="17" edge="1" parent="1" source="15" style="endArrow=block;endFill=0;dashed=1;" target="13" value="implements">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="QMdrMxeSab0mTVNALbq5-17" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="70" width="200" x="510" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="9" parent="QMdrMxeSab0mTVNALbq5-17" style="text;align=left;" value="+ IndirimUygula()" vertex="1">
+          <mxGeometry height="30" width="180" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="8" parent="QMdrMxeSab0mTVNALbq5-17" style="swimlane;" value="OgrenciIndirim" vertex="1">
+          <mxGeometry height="60" width="180" x="-10" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
