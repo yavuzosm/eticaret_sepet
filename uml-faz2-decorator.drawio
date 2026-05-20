@@ -1,0 +1,48 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Sayfa-1" id="vlOwxirjAj1jQJyS4bEv">
+    <mxGraphModel dx="939" dy="573" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" parent="1" style="swimlane;" value="SepetDecorator" vertex="1">
+          <mxGeometry height="100" width="220" x="300" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="3" parent="2" style="text;align=left;" value="# sepetim: sepet&#xa;+ sepetGoster()&#xa;+ toplamFiyat()" vertex="1">
+          <mxGeometry height="70" width="220" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4" parent="1" style="swimlane;" value="KargoDecorator" vertex="1">
+          <mxGeometry height="100" width="220" x="100" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="5" parent="4" style="text;align=left;" value="- kargoUcreti: double&#xa;+ sepetGoster()&#xa;+ toplamFiyat()" vertex="1">
+          <mxGeometry height="70" width="220" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="6" parent="1" style="swimlane;" value="HediyePaketiDecorator" vertex="1">
+          <mxGeometry height="100" width="220" x="500" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="7" parent="6" style="text;align=left;" value="- hediyeUcreti: double&#xa;+ sepetGoster()&#xa;+ toplamFiyat()" vertex="1">
+          <mxGeometry height="70" width="220" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8" edge="1" parent="1" source="4" style="endArrow=block;endFill=0;" target="2" value="extends">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9" edge="1" parent="1" source="6" style="endArrow=block;endFill=0;" target="2" value="extends">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="12" edge="1" parent="1" source="2" style="endArrow=open;" value="içerir">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="410" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QMdrMxeSab0mTVNALbq5-12" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="90" width="210" x="309" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="10" parent="QMdrMxeSab0mTVNALbq5-12" style="swimlane;" value="sepet" vertex="1">
+          <mxGeometry height="80" width="220" x="-5" as="geometry" />
+        </mxCell>
+        <mxCell id="11" parent="10" style="text;align=left;" value="+ urunEkle()&#xa;+ sepetGoster()" vertex="1">
+          <mxGeometry height="50" width="220" y="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
