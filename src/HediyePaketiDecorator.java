@@ -8,13 +8,14 @@ public class HediyePaketiDecorator extends SepetDecorator {
     }
 
     public double toplamFıyat() {
-        return super.toplamFıyat() + hediyeUcreti;
+        return sepetim.toplamFıyat() + hediyeUcreti;
     }
 
     @Override
     public void sepetGoster() {
         sepetim.sepetGoster();
+        double odenenTutar = sepetim.toplamFıyat();
         System.out.println("Hediye Paketi Ucreti| " + hediyeUcreti + " TL");
-        System.out.println("TOPLAM (Hediye Dahil)| " + toplamFıyat() + " TL");
+        System.out.println("GENEL TOPLAM| " + (odenenTutar + hediyeUcreti) + " TL");
     }
 }
